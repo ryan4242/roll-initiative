@@ -4,7 +4,8 @@ import './newLine.css';
 const NewLine = () => {
   return (
     <div>
-      Add Line
+      <input type='num' />
+      <input type='text' />
     </div>
   )
 }

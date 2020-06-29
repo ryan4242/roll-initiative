@@ -1,21 +1,26 @@
 import React, {useState, useEffect} from 'react';
 import './form.css';
+import NewLine from '../addLine/NewLine';
 
 const Form = () => {
-  const [add, setAdd] = useState([{init: '', monster: ''}]);
+  const [monsters, setMonsters] = useState([{init: '', monster: ''}]); //state to track total monsters and initiatives
+
 
   useEffect(() => {
     
-  }, [add])
+  }, [monsters])
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  const handleClick = e => {
+    setMonsters([...monsters, {init: '', monster: ''}])
   }
 
   return (
     <div>
-      Form
-      <button onClick={handleSubmit}>Click me</button>
+      <form>
+        {monsters.map(monster => (<NewLine monster={monster}/>))}
+        <p onClick={handleClick}>Click me</p>
+      </form>
+      
     </div>
   )
 }
