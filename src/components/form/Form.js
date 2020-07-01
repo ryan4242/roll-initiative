@@ -1,27 +1,35 @@
-import React, {useState, useEffect} from 'react';
-import './form.css';
-import NewLine from '../addLine/NewLine';
+import React, {useState} from 'react';
+import {useHistory} from 'react-router-dom';
+import './Form.css';
 
-const Form = () => {
-  const [monsters, setMonsters] = useState([{init: '', monster: ''}]); //state to track total monsters and initiatives
+const Form = props => {
+  const [init, setInit] = useState({name: '', initiative: ''});
 
+  const history = useHistory();
 
-  useEffect(() => {
-    
-  }, [monsters])
+  const handleChange = e => {
+    setInit({...init, [e.target.name]: e.target.value});
+    console.log(init)
+  }
 
-  const handleClick = e => {
-    setMonsters([...monsters, {init: '', monster: ''}])
+  const handleSubmit = e => {
+    e.preventDefault();
+    props.setMonsters([...props.monsters, init]);
+    history.replace('/')
   }
 
   return (
-    <div>
-      <form>
-        {monsters.map(monster => (<NewLine monster={monster}/>))}
-        <p onClick={handleClick}>Click me</p>
-      </form>
-      
-    </div>
+    <form onSubmit={handleSubmit}>
+      <label htmlFor='name'>
+        Name/Monster
+        <input id='name' type='text' name='name' onChange={handleChange} />
+      </label>
+      <label htmlFor='init'>
+        Initiative
+        <input id='init' type='number' name='initiative' onChange={handleChange} />
+      </label>
+      <button type='submit'>add initiative</button>
+    </form>
   )
 }
 
