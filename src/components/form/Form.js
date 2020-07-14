@@ -1,21 +1,17 @@
 import React, {useState} from 'react';
-import {useHistory} from 'react-router-dom';
 import './Form.css';
 
 const Form = props => {
   const [init, setInit] = useState({name: '', initiative: ''});
 
-  const history = useHistory();
-
   const handleChange = e => {
     setInit({...init, [e.target.name]: e.target.value});
-    console.log(init)
   }
 
   const handleSubmit = e => {
     e.preventDefault();
     props.setMonsters([...props.monsters, init]);
-    history.replace('/')
+    props.setActive('');
   }
 
   return (
